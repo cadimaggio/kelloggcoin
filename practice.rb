@@ -17,10 +17,53 @@ blockchain = [
   { "from_user" => "anthony", "to_user" => "evan", "amount" => 1750 }
 ]
 
-# Write code below that returns the number of KelloggCoin that each user has in their 
-# KelloggCoin "wallet".
+users = []
+for entry in blockchain
+  users.push(entry["from_user"])
+  users.push(entry["to_user"])
+end
+users.delete(nil)
+users=users.uniq
 
-# It should print out:
+wallets = Array.new(users)
+wallets.fill(0)
+
+index = 0
+for user in users
+  for transactions in blockchain
+    if transactions["to_user"] == user
+      wallets[index] = wallets[index] + transactions["amount"]
+    end
+    if transactions["from_user"] == user
+      wallets[index] = wallets[index] - transactions["amount"]
+    end
+  end
+  index = index +1
+end
+
+index = 0
+for user in users
+    puts "#{user}'s KelloggCoin balance is #{wallets[index]}"
+index = index + 1
+end
+
+
+# for transactions in blockchain
+#   if transactions["to_user"] == "ben"
+#     ben_wallet = ben_wallet + transactions["amount"]
+#   end
+#   if transactions["from_user"] == "ben"
+#     ben_wallet = ben_wallet - transactions["amount"]
+#   end
+# end
+
+# # puts ben_wallet
+
+
+# # Write code below that returns the number of KelloggCoin that each user has in their 
+# # KelloggCoin "wallet".
+
+# # It should print out:
 # Ben's KelloggCoin balance is 14000
 # Brian's KelloggCoin balance is 13000
 # Evan's KelloggCoin balance is 10350
