@@ -43,7 +43,7 @@ end
 
 index = 0
 for user in users
-    puts "#{user}'s KelloggCoin balance is #{wallets[index]}"
+    puts "#{user.capitalize}'s KelloggCoin balance is #{wallets[index]}"
 index = index + 1
 end
 
